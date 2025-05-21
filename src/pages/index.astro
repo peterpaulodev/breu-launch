@@ -1,11 +1,82 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const fearArray = [
+  {
+    name: "Falhar",
+    left: `5`,
+    top: `5`,
+    delay: "3",
+  },
+  {
+    name: "Rejeição",
+    left: `15`,
+    top: `15`,
+    delay: "6",
+  },
+  {
+    name: "Desconhecido",
+    left: `10`,
+    top: `25`,
+    delay: "9",
+  },
+];
 ---
 
 <Layout>
-	<Welcome />
+  <section>
+    <video
+      autoplay
+      loop
+      src="https://video.wixstatic.com/video/d47472_58cce06729c54ccb935886c4b3647274/1080p/mp4/file.mp4"
+      muted
+      playsinline></video>
+
+    <div id="words-container" class="absolute inset-0">
+      {
+        fearArray.map((word, index) => (
+          <span
+            class="absolute fade-text text-2xl text-gray-300 shadow-md"
+            style={`animation-delay: ${word.delay}s; left: ${word.left}vw; top: ${word.top}vh;`}
+          >
+            {word.name}
+          </span>
+        ))
+      }
+    </div>
+  </section>
 </Layout>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  section {
+    position: relative;
+    height: 100vh;
+    background: transparent;
+    overflow: hidden;
+  }
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+  }
+  .fade-text {
+    animation: fadeInOut 15s infinite;
+  }
+  @keyframes fadeInOut {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+</style>
