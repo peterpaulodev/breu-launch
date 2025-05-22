@@ -1,30 +1,37 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import FearBox from "../components/FearBox.vue";
 
 const fearArray = [
-  {
-    name: "Falhar",
-    left: `5`,
-    top: `5`,
-    delay: "3",
-  },
-  {
-    name: "Rejeição",
-    left: `15`,
-    top: `15`,
-    delay: "6",
-  },
-  {
-    name: "Desconhecido",
-    left: `10`,
-    top: `25`,
-    delay: "9",
-  },
+  { name: "Falhar", left: "5", top: "5", delay: "3" },
+  { name: "Rejeição", left: "18", top: "10", delay: "6" },
+  { name: "Desconhecido", left: "12", top: "22", delay: "9" },
+  { name: "Solidão", left: "75", top: "10", delay: "4" },
+  { name: "Abandono", left: "30", top: "65", delay: "7" },
+  { name: "Fracasso", left: "50", top: "22", delay: "2" },
+  { name: "Vergonha", left: "82", top: "28", delay: "10" },
+  { name: "Insuficiência", left: "42", top: "8", delay: "5" },
+  { name: "Insegurança", left: "60", top: "38", delay: "8" },
+  { name: "Passado", left: "20", top: "78", delay: "6.5" },
+  { name: "Arrependimento", left: "5", top: "58", delay: "9.5" },
+  { name: "Ansiedade", left: "87", top: "18", delay: "3.5" },
+  { name: "Culpa", left: "38", top: "32", delay: "7.5" },
+  { name: "Futuro", left: "57", top: "58", delay: "5.2" },
+  { name: "Vazio", left: "75", top: "72", delay: "6.8" },
+  { name: "Auto-sabotagem", left: "18", top: "45", delay: "8.1" },
+  { name: "Esquecimento", left: "68", top: "24", delay: "4.9" },
+  { name: "Comparações", left: "35", top: "82", delay: "6.2" },
+  { name: "Luto", left: "60", top: "14", delay: "3.7" },
+  { name: "Fardo", left: "10", top: "36", delay: "7.9" },
+  { name: "Falta de controle", left: "88", top: "60", delay: "9.3" },
+  { name: "Julgamento", left: "28", top: "18", delay: "4.6" },
+  { name: "Preso", left: "65", top: "88", delay: "8.7" },
 ];
 ---
 
 <Layout>
   <section>
+		<!-- <canvas id="noise" class="noise"></canvas> -->
     <video
       autoplay
       loop
@@ -36,7 +43,7 @@ const fearArray = [
       {
         fearArray.map((word, index) => (
           <span
-            class="absolute fade-text text-2xl text-gray-300 shadow-md"
+            class="absolute fade-text text-2xl text-gray-300 opacity-0"
             style={`animation-delay: ${word.delay}s; left: ${word.left}vw; top: ${word.top}vh;`}
           >
             {word.name}
@@ -44,8 +51,98 @@ const fearArray = [
         ))
       }
     </div>
+		<FearBox client:load />
   </section>
 </Layout>
+
+<script>
+  const noise = () => {
+    let canvas, ctx;
+
+    let wWidth, wHeight;
+
+    let noiseData = [];
+    let frame = 0;
+
+    let loopTimeout;
+
+    // Create Noise
+    const createNoise = () => {
+      const idata = ctx.createImageData(wWidth, wHeight);
+      const buffer32 = new Uint32Array(idata.data.buffer);
+      const len = buffer32.length;
+
+      for (let i = 0; i < len; i++) {
+        if (Math.random() < 0.5) {
+          buffer32[i] = 0xff000000;
+        }
+      }
+
+      noiseData.push(idata);
+    };
+
+    // Play Noise
+    const paintNoise = () => {
+      if (frame === 5) {
+        frame = 0;
+      } else {
+        frame++;
+      }
+
+      ctx.putImageData(noiseData[frame], 0, 0);
+    };
+
+    // Loop
+    const loop = () => {
+      paintNoise(frame);
+
+      loopTimeout = window.setTimeout(() => {
+        window.requestAnimationFrame(loop);
+      }, 1000 / 25);
+    };
+
+    // Setup
+    const setup = () => {
+      wWidth = window.innerWidth;
+      wHeight = document.body.scrollHeight;
+      canvas.width = wWidth;
+      canvas.height = wHeight;
+
+      for (let i = 0; i < 10; i++) {
+        createNoise();
+      }
+
+      loop();
+    };
+
+    // Reset
+    let resizeThrottle;
+    const reset = () => {
+      window.addEventListener(
+        "resize",
+        () => {
+          window.clearTimeout(resizeThrottle);
+
+          resizeThrottle = window.setTimeout(() => {
+            window.clearTimeout(loopTimeout);
+            setup();
+          }, 200);
+        },
+        false
+      );
+    };
+
+    // Init
+    const init = (() => {
+      canvas = document.getElementById("noise");
+      ctx = canvas.getContext("2d");
+
+      setup();
+    })();
+  };
+
+  noise();
+</script>
 
 <style>
   body {

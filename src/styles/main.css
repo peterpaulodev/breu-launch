@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
 @font-face {
   font-family: "HelpMe";
   src: url("/src/fonts/helpme/HelpMe.woff2") format("woff2"),
@@ -6,6 +10,45 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "WhoAsks";
+  src: url("/src/fonts/whoasks/whoAsks.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
+  /* font-family: "WhoAsks", sans-serif; */
+  /* font-family: "Lora", serif; */
+  font-optical-sizing: auto;
+
+  height: 200vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #1c1c1c;
+}
+
+#words-container {
   font-family: "HelpMe", sans-serif;
+}
+
+
+.box-title {
+  /* font-family: 'HelpMe', cursive; */
+}
+
+input, button {
+  /* font-family: 'Space Grotesk', sans-serif; */
+}
+
+.noise {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  opacity: 0.5;
 }
