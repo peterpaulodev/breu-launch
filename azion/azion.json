@@ -1,0 +1,63 @@
+{
+  "name": "breu-launch",
+  "bucket": "breu-launch",
+  "preset": "astro",
+  "env": "production",
+  "prefix": "20250522191716",
+  "not-first-run": true,
+  "function": {
+    "id": 45196,
+    "name": "__DEFAULT__",
+    "file": ".edge/worker.js",
+    "args": "azion/args.json",
+    "instance-id": 42002,
+    "instance-name": "__DEFAULT__",
+    "cache-id": 0
+  },
+  "application": {
+    "id": 1747949880,
+    "name": "__DEFAULT__"
+  },
+  "domain": {
+    "id": 1747942793,
+    "name": "breu-launch",
+    "domain_name": "hgldyu5yh0.map.azionedge.net",
+    "url": "https://hgldyu5yh0.map.azionedge.net"
+  },
+  "rt-purge": {
+    "purge_on_publish": true
+  },
+  "origin": [
+    {
+      "origin-id": 216988,
+      "origin-key": "d70690d0-f78d-4cd8-9c18-40f4306ea3ee",
+      "name": "origin-storage-default"
+    }
+  ],
+  "rules-engine": {
+    "created": false,
+    "rules": [
+      {
+        "id": 413065,
+        "name": "Set Storage Origin for All Requests",
+        "phase": "request"
+      },
+      {
+        "id": 413066,
+        "name": "Deliver Static Assets",
+        "phase": "request"
+      },
+      {
+        "id": 413067,
+        "name": "Redirect to index.html",
+        "phase": "request"
+      },
+      {
+        "id": 413069,
+        "name": "Redirect to index.html for Subpaths",
+        "phase": "request"
+      }
+    ]
+  },
+  "cache-settings": []
+}
