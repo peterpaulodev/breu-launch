@@ -19,7 +19,7 @@
         class="bg-black/60 backdrop-blur-md p-8 rounded-2xl shadow-[0_0_40px_rgba(125,106,255,0.2)] border border-[#2d2d3a] w-11/12 sm:w-96 text-center space-y-6 z-10"
       >
         <p
-          class="text-2xl sm:text-3xl font-unbounded tracking-wider text-gray-300 drop-shadow-md"
+          class="text-3xl font-unbounded tracking-wider text-gray-300 drop-shadow-md"
         >
           O que te consome?
         </p>
