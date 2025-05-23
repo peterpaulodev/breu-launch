@@ -4,15 +4,15 @@
 
 @font-face {
   font-family: "HelpMe";
-  src: url("/src/fonts/helpme/HelpMe.woff2") format("woff2"),
-    url("/src/fonts/helpme/HelpMe.woff") format("woff");
+  src: url("/fonts/helpme/HelpMe.woff2") format("woff2"),
+    url("/fonts/helpme/HelpMe.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "WhoAsks";
-  src: url("/src/fonts/whoasks/whoAsks.ttf") format("truetype");
+  src: url("/fonts/whoasks/whoAsks.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
