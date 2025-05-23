@@ -25,14 +25,14 @@ const fearArray = [
   { name: "Fardo", left: "10", top: "36", delay: "7.9" },
   { name: "Falta de controle", left: "88", top: "60", delay: "9.3" },
   { name: "Julgamento", left: "28", top: "18", delay: "4.6" },
-  { name: "Preso", left: "65", top: "88", delay: "8.7" },
+  { name: "Sufocamento", left: "65", top: "88", delay: "8.7" },
 ];
 ---
 
 <Layout>
-  <section>
-		<!-- <canvas id="noise" class="noise"></canvas> -->
+  <section class="relative h-screen overflow-hidden">
     <video
+      class="absolute top-0 left-0 object-cover w-full h-full z-[-1]"
       autoplay
       loop
       src="https://video.wixstatic.com/video/d47472_58cce06729c54ccb935886c4b3647274/1080p/mp4/file.mp4"
@@ -43,7 +43,7 @@ const fearArray = [
       {
         fearArray.map((word, index) => (
           <span
-            class="absolute fade-text text-2xl text-gray-300 opacity-0"
+            class="absolute fade-text text-lg md:text-xl lg:text-2xl text-gray-300 opacity-0"
             style={`animation-delay: ${word.delay}s; left: ${word.left}vw; top: ${word.top}vh;`}
           >
             {word.name}
@@ -51,119 +51,11 @@ const fearArray = [
         ))
       }
     </div>
-		<FearBox client:load />
+    <FearBox client:load />
   </section>
 </Layout>
 
-<script>
-  const noise = () => {
-    let canvas, ctx;
-
-    let wWidth, wHeight;
-
-    let noiseData = [];
-    let frame = 0;
-
-    let loopTimeout;
-
-    // Create Noise
-    const createNoise = () => {
-      const idata = ctx.createImageData(wWidth, wHeight);
-      const buffer32 = new Uint32Array(idata.data.buffer);
-      const len = buffer32.length;
-
-      for (let i = 0; i < len; i++) {
-        if (Math.random() < 0.5) {
-          buffer32[i] = 0xff000000;
-        }
-      }
-
-      noiseData.push(idata);
-    };
-
-    // Play Noise
-    const paintNoise = () => {
-      if (frame === 5) {
-        frame = 0;
-      } else {
-        frame++;
-      }
-
-      ctx.putImageData(noiseData[frame], 0, 0);
-    };
-
-    // Loop
-    const loop = () => {
-      paintNoise(frame);
-
-      loopTimeout = window.setTimeout(() => {
-        window.requestAnimationFrame(loop);
-      }, 1000 / 25);
-    };
-
-    // Setup
-    const setup = () => {
-      wWidth = window.innerWidth;
-      wHeight = document.body.scrollHeight;
-      canvas.width = wWidth;
-      canvas.height = wHeight;
-
-      for (let i = 0; i < 10; i++) {
-        createNoise();
-      }
-
-      loop();
-    };
-
-    // Reset
-    let resizeThrottle;
-    const reset = () => {
-      window.addEventListener(
-        "resize",
-        () => {
-          window.clearTimeout(resizeThrottle);
-
-          resizeThrottle = window.setTimeout(() => {
-            window.clearTimeout(loopTimeout);
-            setup();
-          }, 200);
-        },
-        false
-      );
-    };
-
-    // Init
-    const init = (() => {
-      canvas = document.getElementById("noise");
-      ctx = canvas.getContext("2d");
-
-      setup();
-    })();
-  };
-
-  noise();
-</script>
-
 <style>
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  section {
-    position: relative;
-    height: 100vh;
-    background: transparent;
-    overflow: hidden;
-  }
-  video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-    z-index: -1;
-  }
   .fade-text {
     animation: fadeInOut 15s infinite;
   }

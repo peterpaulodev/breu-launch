@@ -16,10 +16,10 @@
     <transition name="fade">
       <div
         v-if="!submitted"
-        class="bg-black/60 backdrop-blur-md p-8 rounded-2xl shadow-[0_0_40px_rgba(125,106,255,0.2)] border border-[#2d2d3a] w-96 text-center space-y-6 z-10"
+        class="bg-black/60 backdrop-blur-md p-8 rounded-2xl shadow-[0_0_40px_rgba(125,106,255,0.2)] border border-[#2d2d3a] w-11/12 sm:w-96 text-center space-y-6 z-10"
       >
         <p
-          class="text-3xl font-unbounded tracking-wider text-gray-300 drop-shadow-md"
+          class="text-2xl sm:text-3xl font-unbounded tracking-wider text-gray-300 drop-shadow-md"
         >
           O que te consome?
         </p>
@@ -41,7 +41,7 @@
     <transition name="zoom">
       <div
         v-if="submitted"
-        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-8xl text-zinc-100 animate-glow text-center w-full px-6 font-[HelpMe] tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] z-10"
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-5xl sm:text-8xl text-zinc-100 animate-glow text-center w-full px-6 font-[HelpMe] tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] z-10"
       >
         {{ fear }}
       </div>
